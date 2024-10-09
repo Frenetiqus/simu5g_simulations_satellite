@@ -1,0 +1,102 @@
+version 3
+run CBR-DL-0-20241009-21:02:20-26264
+attr configname CBR-DL
+attr datetime 20241009-21:02:20
+attr datetimef 20241009-210220
+attr experiment CBR-DL
+attr inifile omnetpp.ini
+attr iterationvars "$u=0, $numRbs=50, $numUEs=1"
+attr iterationvarsd u=0/numRbs=50/numUEs=1
+attr iterationvarsf u=0,numRbs=50,numUEs=1-
+attr measurement "$u=0, $numRbs=50, $numUEs=1"
+attr network simu5g.simulations.NR.networks.MultiCell_Standalone
+attr processid 26264
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+itervar numRbs 50
+itervar numUEs 1
+itervar u 0
+config image-path ../../../images;../../../../inet4.5/images
+config extends MultiCell
+config description "CBR DL traffic from remote server to UEs"
+config *.ue[*].numApps 1
+config *.server.numApps 1
+config *.ue[*].app[*].typename CbrReceiver
+config *.ue[*].app[*].localPort 3000
+config *.server.app[*].typename CbrSender
+config *.server.app[*].PacketSize 100
+config *.server.app[*].sampling_time 0.02s
+config *.server.app[*].destAddress "\"ue[\" + string(ancestorIndex(0)) + \"]\""
+config *.server.app[*].destPort 3000
+config *.server.app[*].localPort 3088+ancestorIndex(0)
+config *.server.app[*].startTime uniform(0s,0.02s)
+config *.server.app[*].finishTime 120s
+config *.ue[*].cellularNic.rrc.debug true
+config *.gnb*.cellularNic.rrc.debug true
+config *.ue[*].cellularNic.nrPhy.debug true
+config *.gnb*.cellularNic.nrPhy.debug true
+config *.binder.debug true
+config *.configurator.verbose true
+config network simu5g.simulations.NR.networks.MultiCell_Standalone
+config sim-time-limit 120s
+config description "Base configuration, do not run this config!"
+config **.mobility.constraintAreaMaxX 2000m
+config **.mobility.constraintAreaMaxY 1750m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 250m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+config *.carrierAggregation.numComponentCarriers 1
+config *.carrierAggregation.componentCarrier[0].numerologyIndex 0
+config *.carrierAggregation.componentCarrier[0].carrierFrequency 2GHz
+config *.carrierAggregation.componentCarrier[0].numBands 50
+config *.gnb*.cellularNic.numCarriers 1
+config *.gnb*.cellularNic.channelModel[0].componentCarrierIndex 0
+config *.ue[*].cellularNic.numCarriers 1
+config *.gnb1.mobility.initialX 50m
+config *.gnb1.mobility.initialY 500m
+config *.gnb2.mobility.initialX 1500m
+config *.gnb2.mobility.initialY 500m
+config *.gnb*.numX2Apps 1
+config *.gnb*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+config *.gnb1.x2App[0].client.connectAddress "\"gnb2%x2ppp0\""
+config *.gnb2.x2App[0].client.connectAddress "\"gnb1%x2ppp0\""
+config *.numUe 1
+config *.ue[*].macCellId 0
+config *.ue[*].masterId 0
+config *.ue[*].nrMacCellId 1
+config *.ue[*].nrMasterId 1
+config **.dynamicCellAssociation true
+config **.enableHandover true
+config *.ue[*].mobility.typename LinearMobility
+config *.ue[*].mobility.initialX 50m
+config *.ue[*].mobility.initialY 550m
+config *.ue[*].mobility.speed 15mps
+config *.ue[*].mobility.initialMovementHeading 0deg
+config image-path ../../../images
+config output-scalar-file-append false
+config **.routingRecorder.enabled false
+config output-scalar-file "results/CBR-DL/$u=0, $numRbs=50, $numUEs=1-0.sca"
+config output-vector-file "results/CBR-DL/$u=0, $numRbs=50, $numUEs=1-0.vec"
+config seed-set 0
+config **.sctp.**.scalar-recording false
+config **.sctp.**.vector-recording false
+config **.vector-recording true
+config **.sctp.nagleEnabled false
+config **.sctp.enableHeartbeats false
+config **.downlink_interference true
+config **.uplink_interference true
+config **.ueTxPower 1
+config **.eNodeBTxPower 2
+config **.targetBler 0.01
+config **.blerShift 5
+config **.fbPeriod 40
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+
+scalar MultiCell_Standalone.gnb1.x2App[0].client ums 1452
+scalar MultiCell_Standalone.gnb2.x2App[0].client ums 1452
+

@@ -1,0 +1,466 @@
+file 21976 1726339326                                           
+version 3
+run HandoverSimulation2-0-20240914-20:41:56-15496
+attr configname HandoverSimulation2
+attr datetime 20240914-20:41:56
+attr datetimef 20240914-204156
+attr experiment HandoverSimulation2
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network simu5g.simulations.NR.networks.MultiCell_Standalone
+attr processid 15496
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../images;../../../../inet4.5/images
+config description "Simulation with UE moving from gNB1 to gNB2 to observe handover"
+config network simu5g.simulations.NR.networks.MultiCell_Standalone
+config sim-time-limit 20s
+config warmup-period 1s
+config extends General
+config **.amcType "\"NRAmc\""
+config **.targetBler 0.01
+config **.blerShift 5
+config *.configurator.config "xmldoc(\"demo.xml\")"
+config **.mobility.constraintAreaMaxX 1000m
+config **.mobility.constraintAreaMaxY 1000m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+config *.numUe 1
+config *.ue[*].mobility.typename LinearMobility
+config *.ue[*].mobility.initialX 250m
+config *.ue[*].mobility.initialY 350m
+config *.ue[*].mobility.speed 25mps
+config *.ue[*].mobility.angle 0deg
+config *.ue[*].mobility.displayMovement true
+config *.gnb1.mobility.initialX 250m
+config *.gnb1.mobility.initialY 300m
+config *.gnb2.mobility.initialX 750m
+config *.gnb2.mobility.initialY 300m
+config *.gnb1.nodeId 1
+config *.gnb2.nodeId 2
+config *.gnb1.numX2Apps 1
+config *.gnb2.numX2Apps 1
+config *.gnb1.x2App[0].typename LteX2GnbApp
+config *.gnb2.x2App[0].typename LteX2GnbApp
+config *.gnb1.x2App[0].localAddress "\"10.0.0.1\""
+config *.gnb1.x2App[0].remoteAddress "\"10.0.0.2\""
+config *.gnb1.x2App[0].localPort 0
+config *.gnb2.x2App[0].localAddress "\"10.0.0.2\""
+config *.gnb2.x2App[0].remoteAddress "\"10.0.0.1\""
+config *.gnb2.x2App[0].localPort 0
+config *.binder.maxNumX2PortsPerNode 10
+config *.gnb1.cellularNic.phy.enableHandover true
+config *.gnb2.cellularNic.phy.enableHandover true
+config *.ue[*].cellularNic.phy.enableHandover true
+config *.ue[*].cellularNic.nrPhy.enableHandover true
+config *.ue[*].cellularNic.lteNic.rrc.enableHandover true
+config *.gnb1.cellularNic.lteNic.rrc.enableHandover true
+config *.gnb2.cellularNic.lteNic.rrc.enableHandover true
+config *.ue[*].cellularNic.lteNic.rrc.handoverMargin 3dB
+config *.ue[*].cellularNic.lteNic.rrc.timeToTrigger 1s
+config *.ue[*].macCellId 0
+config *.ue[*].masterId 0
+config *.ue[*].nrMacCellId 1
+config *.ue[*].nrMasterId 1
+config *.server.numApps 1
+config *.ue[*].numApps 1
+config *.ue[*].app[0].typename UdpSink
+config *.ue[*].app[0].localPort 5000
+config *.server.app[0].typename UdpBasicBurst
+config *.server.app[0].destAddresses "\"ue[0]\""
+config *.server.app[0].chooseDestAddrMode "\"once\""
+config *.server.app[0].destPort 5000
+config *.server.app[0].messageLength 1000B
+config *.server.app[0].burstDuration 0s
+config *.server.app[0].sleepDuration 0s
+config *.server.app[0].sendInterval 0.01s
+config *.server.app[0].startTime 1s
+config *.server.hasIpv6 false
+config *.router.hasIpv6 false
+config *.upf.hasIpv6 false
+config *.iUpf.hasIpv6 false
+config *.gnb1.hasIpv6 false
+config *.gnb2.hasIpv6 false
+config *.ue[*].hasIpv6 false
+config *.server.numEthInterfaces 0
+config *.router.numEthInterfaces 0
+config *.upf.numEthInterfaces 0
+config *.iUpf.numEthInterfaces 0
+config output-scalar-file-append false
+config network simu5g.simulations.NR.networks.SingleCell_Standalone
+config sim-time-limit 10s
+config warmup-period 1s
+config seed-set 0
+config output-scalar-file results/HandoverSimulation2/0.sca
+config output-vector-file results/HandoverSimulation2/0.vec
+config **.routingRecorder.enabled false
+config **.amcType "\"NRAmc\""
+config **.targetBler 0.01
+config **.blerShift 5
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+config **.mobility.constraintAreaMaxX 1000m
+config **.mobility.constraintAreaMaxY 1000m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+
+vector 0 MultiCell_Standalone.server.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 MultiCell_Standalone.server.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 MultiCell_Standalone.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 3 MultiCell_Standalone.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 4 MultiCell_Standalone.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 5 MultiCell_Standalone.router.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 6 MultiCell_Standalone.router.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 7 MultiCell_Standalone.router.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 8 MultiCell_Standalone.router.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 9 MultiCell_Standalone.upf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 10 MultiCell_Standalone.upf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 11 MultiCell_Standalone.upf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 12 MultiCell_Standalone.upf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 13 MultiCell_Standalone.upf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 14 MultiCell_Standalone.upf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 15 MultiCell_Standalone.upf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 16 MultiCell_Standalone.iUpf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 17 MultiCell_Standalone.iUpf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 18 MultiCell_Standalone.iUpf.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 19 MultiCell_Standalone.iUpf.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 20 MultiCell_Standalone.iUpf.ppp[2].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 21 MultiCell_Standalone.iUpf.ppp[2].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 22 MultiCell_Standalone.iUpf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 23 MultiCell_Standalone.iUpf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 24 MultiCell_Standalone.iUpf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 25 MultiCell_Standalone.iUpf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 26 MultiCell_Standalone.iUpf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 27 MultiCell_Standalone.gnb1.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 28 MultiCell_Standalone.gnb1.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 29 MultiCell_Standalone.gnb1.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 30 MultiCell_Standalone.gnb1.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 31 MultiCell_Standalone.gnb1.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 32 MultiCell_Standalone.gnb1.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 33 MultiCell_Standalone.gnb1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 34 MultiCell_Standalone.gnb1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 35 MultiCell_Standalone.gnb1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 36 MultiCell_Standalone.gnb2.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 37 MultiCell_Standalone.gnb2.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 38 MultiCell_Standalone.gnb2.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 39 MultiCell_Standalone.gnb2.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 40 MultiCell_Standalone.gnb2.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 41 MultiCell_Standalone.gnb2.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 42 MultiCell_Standalone.gnb2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 43 MultiCell_Standalone.gnb2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 44 MultiCell_Standalone.gnb2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 45 MultiCell_Standalone.ue[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 46 MultiCell_Standalone.ue[0].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 47 MultiCell_Standalone.ue[0].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+0	20332 45 0 0 1 1 5 0 0 0 0
+1	20377 45 0 0 1 1 5 0 0 0 0
+2	20422 9 0 0 1 1 1 0 0 0 0
+3	20431 9 0 0 1 1 1 0 0 0 0
+4	20440 9 0 0 1 1 1 0 0 0 0
+5	20449 45 0 0 1 1 5 0 0 0 0
+6	20494 45 0 0 1 1 5 0 0 0 0
+7	20539 45 0 0 1 1 5 0 0 0 0
+8	20584 45 0 0 1 1 5 0 0 0 0
+9	20629 45 0 0 1 1 5 0 0 0 0
+10	20674 50 0 0 1 1 5 0 0 0 0
+11	20724 50 0 0 1 1 5 0 0 0 0
+12	20774 50 0 0 1 1 5 0 0 0 0
+13	20824 10 0 0 1 1 1 0 0 0 0
+14	20834 10 0 0 1 1 1 0 0 0 0
+15	20844 10 0 0 1 1 1 0 0 0 0
+16	20854 50 0 0 1 1 5 0 0 0 0
+17	20904 50 0 0 1 1 5 0 0 0 0
+18	20954 50 0 0 1 1 5 0 0 0 0
+19	21004 50 0 0 1 1 5 0 0 0 0
+20	21054 50 0 0 1 1 5 0 0 0 0
+21	21104 50 0 0 1 1 5 0 0 0 0
+22	21154 50 0 0 1 1 5 0 0 0 0
+23	21204 50 0 0 1 1 5 0 0 0 0
+24	21254 10 0 0 1 1 1 0 0 0 0
+25	21264 10 0 0 1 1 1 0 0 0 0
+26	21274 10 0 0 1 1 1 0 0 0 0
+27	21284 50 0 0 1 1 5 0 0 0 0
+28	21334 50 0 0 1 1 5 0 0 0 0
+29	21384 50 0 0 1 1 5 0 0 0 0
+30	21434 50 0 0 1 1 5 0 0 0 0
+31	21484 50 0 0 1 1 5 0 0 0 0
+32	21534 50 0 0 1 1 5 0 0 0 0
+33	21584 10 0 0 1 1 1 0 0 0 0
+34	21594 10 0 0 1 1 1 0 0 0 0
+35	21604 10 0 0 1 1 1 0 0 0 0
+36	21614 50 0 0 1 1 5 0 0 0 0
+37	21664 50 0 0 1 1 5 0 0 0 0
+38	21714 50 0 0 1 1 5 0 0 0 0
+39	21764 50 0 0 1 1 5 0 0 0 0
+40	21814 50 0 0 1 1 5 0 0 0 0
+41	21864 50 0 0 1 1 5 0 0 0 0
+42	21914 10 0 0 1 1 1 0 0 0 0
+43	21924 10 0 0 1 1 1 0 0 0 0
+44	21934 10 0 0 1 1 1 0 0 0 0
+45	21944 10 0 0 1 1 1 0 0 0 0
+46	21954 10 0 0 1 1 1 0 0 0 0
+47	21964 10 0 0 1 1 1 0 0 0 0
+

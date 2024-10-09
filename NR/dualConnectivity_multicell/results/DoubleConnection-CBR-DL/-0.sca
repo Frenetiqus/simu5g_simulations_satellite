@@ -1,0 +1,125 @@
+version 3
+run DoubleConnection-CBR-DL-0-20240919-13:46:49-8396
+attr configname DoubleConnection-CBR-DL
+attr datetime 20240919-13:46:49
+attr datetimef 20240919-134649
+attr experiment DoubleConnection-CBR-DL
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network simu5g.simulations.NR.networks.MultiCell_withSecondaryGnb
+attr processid 8396
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config image-path ../../../images;../../../../inet4.5/images
+config extends DualConnectivity
+config description "two CBR downlink connections - one via eNodeB, one via gNodeB"
+config *.ue[*].numApps 2
+config *.server.numApps 2
+config *.ue[*].app[*].typename CbrReceiver
+config *.ue[*].app[*].localPort 3000+ancestorIndex(0)
+config *.server.app[*].typename CbrSender
+config *.server.app[*].destAddress "\"ue[0]\""
+config *.server.app[*].localPort 3088+ancestorIndex(0)
+config *.server.app[*].destPort 3000+ancestorIndex(0)
+config *.server.app[*].PacketSize 1000
+config *.server.app[*].sampling_time 0.05s
+config *.server.app[*].startTime "uniform(0.02s, 0.05s)"
+config *.server.app[*].finishTime 39.9s
+config *.server.app[0].tos -1
+config *.server.app[1].tos 10
+config network simu5g.simulations.NR.networks.MultiCell_withSecondaryGnb
+config description "Base configuration, do not run this config!"
+config *.masterEnb1.mobility.initialX 300m
+config *.masterEnb1.mobility.initialY 300m
+config *.secondaryGnb1.mobility.initialX 500m
+config *.secondaryGnb1.mobility.initialY 400m
+config *.masterEnb2.mobility.initialX 700m
+config *.masterEnb2.mobility.initialY 300m
+config *.secondaryGnb2.mobility.initialX 800m
+config *.secondaryGnb2.mobility.initialY 400m
+config *.masterEnb*.nicType "\"LteNicEnbD2D\""
+config *.masterEnb*.cellularNic.LtePdcpRrcType "\"NRPdcpRrcEnb\""
+config *.secondaryGnb1.masterId 1
+config *.secondaryGnb2.masterId 3
+config **.dualConnectivityEnabled true
+config **.downlink_interference true
+config **.uplink_interference true
+config *.masterEnb*.cellularNic.phy.eNodeBTxPower 40
+config *.secondaryGnb*.cellularNic.phy.eNodeBTxPower 20
+config **.minRssi 1dB
+config *.carrierAggregation.numComponentCarriers 2
+config *.carrierAggregation.componentCarrier[0].carrierFrequency 2GHz
+config *.carrierAggregation.componentCarrier[0].numBands 50
+config *.carrierAggregation.componentCarrier[0].numerologyIndex 0
+config *.carrierAggregation.componentCarrier[1].carrierFrequency 4GHz
+config *.carrierAggregation.componentCarrier[1].numBands 50
+config *.carrierAggregation.componentCarrier[1].numerologyIndex 0
+config *.masterEnb*.cellularNic.numCarriers 1
+config *.masterEnb*.cellularNic.channelModel[0].componentCarrierIndex 0
+config *.secondaryGnb*.cellularNic.numCarriers 1
+config *.secondaryGnb*.cellularNic.channelModel[0].componentCarrierIndex 1
+config *.ue[*].cellularNic.numCarriers 1
+config *.ue[*].cellularNic.numNRCarriers 1
+config *.ue[*].cellularNic.channelModel[0].componentCarrierIndex 0
+config *.ue[*].cellularNic.nrChannelModel[0].componentCarrierIndex 1
+config *.masterEnb*.numX2Apps 2
+config *.secondaryGnb*.numX2Apps 1
+config *.*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+config *.masterEnb1.x2App[0].client.connectAddress "\"secondaryGnb1%x2ppp0\""
+config *.masterEnb2.x2App[0].client.connectAddress "\"secondaryGnb2%x2ppp0\""
+config *.secondaryGnb1.x2App[0].client.connectAddress "\"masterEnb1%x2ppp0\""
+config *.secondaryGnb2.x2App[0].client.connectAddress "\"masterEnb2%x2ppp0\""
+config *.masterEnb1.x2App[1].client.connectAddress "\"masterEnb2%x2ppp1\""
+config *.masterEnb2.x2App[1].client.connectAddress "\"masterEnb1%x2ppp1\""
+config *.numUe 1
+config **.dynamicCellAssociation true
+config **.enableHandover true
+config *.ue[*].macCellId 1
+config *.ue[*].masterId 1
+config *.ue[*].nrMacCellId 2
+config *.ue[*].nrMasterId 2
+config *.ue[*].mobility.typename LinearMobility
+config *.ue[*].mobility.initialX 300m
+config *.ue[*].mobility.initialY 350m
+config *.ue[*].mobility.speed 13.9mps
+config *.ue[*].mobility.initialMovementHeading 0deg
+config image-path ../../../images
+config output-scalar-file-append false
+config sim-time-limit 40s
+config warmup-period 1s
+config seed-set 0
+config debug-on-errors false
+config output-scalar-file results/DoubleConnection-CBR-DL/-0.sca
+config output-vector-file results/DoubleConnection-CBR-DL/-0.vec
+config **.vector-recording true
+config **.sctp.**.scalar-recording false
+config **.sctp.**.vector-recording false
+config **.routingRecorder.enabled false
+config **.mobility.constraintAreaMaxX 1000m
+config **.mobility.constraintAreaMaxY 700m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+config **.sctp.nagleEnabled false
+config **.sctp.enableHeartbeats false
+config **.fading false
+config **.shadowing false
+config **.targetBler 0.01
+config **.blerShift 5
+
+scalar MultiCell_withSecondaryGnb.masterEnb1.x2App[0].client ums 1452
+scalar MultiCell_withSecondaryGnb.masterEnb1.x2App[1].client ums 1452
+scalar MultiCell_withSecondaryGnb.secondaryGnb1.x2App[0].client ums 1452
+scalar MultiCell_withSecondaryGnb.masterEnb2.x2App[0].client ums 1452
+scalar MultiCell_withSecondaryGnb.masterEnb2.x2App[1].client ums 1452
+scalar MultiCell_withSecondaryGnb.secondaryGnb2.x2App[0].client ums 1452
+
