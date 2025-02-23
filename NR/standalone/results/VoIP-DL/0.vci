@@ -1,0 +1,555 @@
+file 24037 1730368760                                           
+version 3
+run VoIP-DL-0-20241031-10:59:10-164120
+attr configname VoIP-DL
+attr datetime 20241031-10:59:10
+attr datetimef 20241031-105910
+attr experiment VoIP-DL
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvarsd ""
+attr iterationvarsf ""
+attr measurement ""
+attr network simu5g.simulations.NR.networks.SingleCell_Standalone
+attr processid 164120
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+config extends Standalone
+config *.ue[*].numApps 1
+config *.server.numApps 1
+config *.ue[*].app[*].typename VoIPReceiver
+config *.ue[*].app[0].localPort 3000
+config *.server.app[*].PacketSize 40
+config *.server.app[*].destAddress "\"ue[0]\""
+config *.server.app[*].localPort 3088+ancestorIndex(0)
+config *.server.app[*].typename VoIPSender
+config *.server.app[*].startTime uniform(0s,0.02s)
+config network simu5g.simulations.NR.networks.SingleCell_Standalone
+config sim-time-limit 20s
+config *.gnb.mobility.initialX 450m
+config *.gnb.mobility.initialY 300m
+config *.numUe 1
+config *.ue[0].macCellId 0
+config *.ue[0].masterId 0
+config *.ue[0].nrMacCellId 1
+config *.ue[0].nrMasterId 1
+config *.ue[0].mobility.initialX 450m
+config *.ue[0].mobility.initialY 350m
+config image-path ../../../images
+config output-scalar-file-append false
+config sim-time-limit 20s
+config **.routingRecorder.enabled false
+config output-scalar-file results/VoIP-DL/0.sca
+config output-vector-file results/VoIP-DL/0.vec
+config seed-set 0
+config **.vector-recording true
+config **.mobility.constraintAreaMaxX 1000m
+config **.mobility.constraintAreaMaxY 1000m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+config **.numBands 50
+config **.ueTxPower 26dBm
+config **.eNodeBTxPower 40dBm
+config **.targetBler 0.01
+config **.blerShift 5
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+
+vector 0 SingleCell_Standalone.server.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 SingleCell_Standalone.server.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 SingleCell_Standalone.server.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 3 SingleCell_Standalone.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 4 SingleCell_Standalone.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 5 SingleCell_Standalone.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 6 SingleCell_Standalone.router.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 7 SingleCell_Standalone.router.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 8 SingleCell_Standalone.router.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 9 SingleCell_Standalone.router.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 10 SingleCell_Standalone.router.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 11 SingleCell_Standalone.router.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 12 SingleCell_Standalone.upf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 13 SingleCell_Standalone.upf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 14 SingleCell_Standalone.upf.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 15 SingleCell_Standalone.upf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 16 SingleCell_Standalone.upf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 17 SingleCell_Standalone.upf.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 18 SingleCell_Standalone.upf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 19 SingleCell_Standalone.upf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 20 SingleCell_Standalone.upf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 21 SingleCell_Standalone.iUpf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 22 SingleCell_Standalone.iUpf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 23 SingleCell_Standalone.iUpf.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 24 SingleCell_Standalone.iUpf.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 25 SingleCell_Standalone.iUpf.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 26 SingleCell_Standalone.iUpf.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 27 SingleCell_Standalone.iUpf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 28 SingleCell_Standalone.iUpf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 29 SingleCell_Standalone.iUpf.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 30 SingleCell_Standalone.iUpf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 31 SingleCell_Standalone.iUpf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 32 SingleCell_Standalone.iUpf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 33 SingleCell_Standalone.gnb.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 SingleCell_Standalone.gnb.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 SingleCell_Standalone.gnb.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 36 SingleCell_Standalone.gnb.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 37 SingleCell_Standalone.gnb.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 38 SingleCell_Standalone.gnb.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 39 SingleCell_Standalone.gnb.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 40 SingleCell_Standalone.gnb.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 41 SingleCell_Standalone.gnb.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 42 SingleCell_Standalone.ue[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 43 SingleCell_Standalone.ue[0].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 44 SingleCell_Standalone.ue[0].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 45 SingleCell_Standalone.ue[0].cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving cell for the UE"
+attr unit ""
+vector 46 SingleCell_Standalone.ue[0].cellularNic.nrPhy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving cell for the UE"
+attr unit ""
+vector 47 SingleCell_Standalone.gnb.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 48 SingleCell_Standalone.gnb.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 49 SingleCell_Standalone.ue[0].cellularNic.nrChannelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 50 SingleCell_Standalone.ue[0].cellularNic.nrChannelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+vector 51 SingleCell_Standalone.gnb.cellularNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 52 SingleCell_Standalone.server.app[0] voIPGeneratedThroughput:vector ETV
+attr recordingmode vector
+attr source voIPGeneratedThroughput
+attr title "Throughput generated by the application"
+attr unit Bps
+vector 53 SingleCell_Standalone.server.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 54 SingleCell_Standalone.server.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 55 SingleCell_Standalone.server.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 56 SingleCell_Standalone.server.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 57 SingleCell_Standalone.server.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 58 SingleCell_Standalone.server.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 59 SingleCell_Standalone.router.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 60 SingleCell_Standalone.router.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 61 SingleCell_Standalone.router.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 62 SingleCell_Standalone.router.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 63 SingleCell_Standalone.router.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 64 SingleCell_Standalone.router.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 65 SingleCell_Standalone.router.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 66 SingleCell_Standalone.upf.pppIf.ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 67 SingleCell_Standalone.upf.pppIf.ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 68 SingleCell_Standalone.upf.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 69 SingleCell_Standalone.upf.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 70 SingleCell_Standalone.upf.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 71 SingleCell_Standalone.upf.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 72 SingleCell_Standalone.upf.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 73 SingleCell_Standalone.upf.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+0	21455 62 0 88 0 0.016230369485 6 0 0 0 0
+1	21517 62 0 88 0 0.016230369485 6 0 0 0 0
+2	21579 52 0 89 0 0.016230429485 3 0 1 1 1
+3	21631 8 0 0 0 0 1 0 0 0 0
+4	21639 8 0 0 0 0 1 0 0 0 0
+5	21647 8 0 0 0 0 1 0 0 0 0
+6	21655 40 0 0 0 0 5 0 0 0 0
+7	21695 40 0 0 0 0 5 0 0 0 0
+8	21735 8 0 0 0 0 1 0 0 0 0
+9	21743 62 0 92 0 0.016230479485 6 0 0 0 0
+10	21805 68 0 92 0 0.016230479485 6 0 0 0 0
+11	21873 55 0 93 0 0.016230539485 3 0 1 1 1
+12	21928 68 0 99 0 0.016230589485 6 0 0 0 0
+13	21996 68 0 99 0 0.016230589485 6 0 0 0 0
+14	22064 32 0 99 0 0.016230589485 2 0 1 1 1
+15	22096 45 0 0 0 0 5 0 0 0 0
+16	22141 45 0 0 0 0 5 0 0 0 0
+17	22186 9 0 0 0 0 1 0 0 0 0
+18	22195 9 0 0 0 0 1 0 0 0 0
+19	22204 9 0 0 0 0 1 0 0 0 0
+20	22213 9 0 0 0 0 1 0 0 0 0
+21	22222 45 0 0 0 0 5 0 0 0 0
+22	22267 45 0 0 0 0 5 0 0 0 0
+23	22312 9 0 0 0 0 1 0 0 0 0
+24	22321 45 0 0 0 0 5 0 0 0 0
+25	22366 45 0 0 0 0 5 0 0 0 0
+26	22411 9 0 0 0 0 1 0 0 0 0
+27	22420 45 0 0 0 0 5 0 0 0 0
+28	22465 45 0 0 0 0 5 0 0 0 0
+29	22510 9 0 0 0 0 1 0 0 0 0
+30	22519 9 0 0 0 0 1 0 0 0 0
+31	22528 9 0 0 0 0 1 0 0 0 0
+32	22537 9 0 0 0 0 1 0 0 0 0
+33	22546 45 0 0 0 0 5 0 0 0 0
+34	22591 45 0 0 0 0 5 0 0 0 0
+35	22636 9 0 0 0 0 1 0 0 0 0
+36	22645 45 0 0 0 0 5 0 0 0 0
+37	22690 45 0 0 0 0 5 0 0 0 0
+38	22735 9 0 0 0 0 1 0 0 0 0
+39	22744 9 0 0 0 0 1 0 0 0 0
+40	22753 9 0 0 0 0 1 0 0 0 0
+41	22762 9 0 0 0 0 1 0 0 0 0
+42	22771 9 0 0 0 0 1 0 0 0 0
+43	22780 9 0 0 0 0 1 0 0 0 0
+44	22789 9 0 0 0 0 1 0 0 0 0
+45	22798 18 0 0 0 0 2 0 0 0 0
+46	22816 18 0 0 0 0 2 0 1 1 1
+47	22834 223 10 80 0.001 0.016 16 0 0 0 0
+48	23057 223 10 80 0.001 0.016 16 0 0 0 0
+49	23280 84 18 74 0.002 0.014 3 53.767783643544 53.767783643544 161.30335093063 8672.9236738168
+50	23364 84 18 74 0.002 0.014 3 57.552864402988 57.552864402988 172.65859320896 9936.9966029661
+51	23448 42 19 75 0.002 0.014 3 1 1 3 3
+52	23490 37 85 85 0.016230369485 0.016230369485 1 2464.5156745795 2464.5156745795 2464.5156745795 6073837.5102483
+53	23527 24 86 86 0.016230369485 0.016230369485 1 48 48 48 2304
+54	23551 25 88 88 0.016230369485 0.016230369485 1 544 544 544 295936
+55	23576 23 88 88 0.016230369485 0.016230369485 1 0 0 0 0
+56	23599 25 88 88 0.016230369485 0.016230369485 1 544 544 544 295936
+57	23624 24 88 88 0.016230369485 0.016230369485 1 68 68 68 4624
+58	23648 24 88 88 0.016230369485 0.016230369485 1 75 75 75 5625
+59	23672 24 90 90 0.016230479485 0.016230479485 1 75 75 75 5625
+60	23696 24 90 90 0.016230479485 0.016230479485 1 68 68 68 4624
+61	23720 25 92 92 0.016230479485 0.016230479485 1 544 544 544 295936
+62	23745 23 92 92 0.016230479485 0.016230479485 1 0 0 0 0
+63	23768 25 92 92 0.016230479485 0.016230479485 1 544 544 544 295936
+64	23793 24 92 92 0.016230479485 0.016230479485 1 68 68 68 4624
+65	23817 24 92 92 0.016230479485 0.016230479485 1 75 75 75 5625
+66	23841 24 94 94 0.016230589485 0.016230589485 1 75 75 75 5625
+67	23865 24 94 94 0.016230589485 0.016230589485 1 68 68 68 4624
+68	23889 24 97 97 0.016230589485 0.016230589485 1 84 84 84 7056
+69	23913 25 99 99 0.016230589485 0.016230589485 1 832 832 832 692224
+70	23938 23 99 99 0.016230589485 0.016230589485 1 0 0 0 0
+71	23961 25 99 99 0.016230589485 0.016230589485 1 832 832 832 692224
+72	23986 25 99 99 0.016230589485 0.016230589485 1 104 104 104 10816
+73	24011 25 99 99 0.016230589485 0.016230589485 1 111 111 111 12321
+

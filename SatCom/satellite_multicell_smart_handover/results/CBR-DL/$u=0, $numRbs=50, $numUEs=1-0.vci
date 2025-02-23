@@ -1,0 +1,1868 @@
+file 4701351 1732965425                                         
+version 3
+run CBR-DL-0-20241130-12:16:57-444844
+attr configname CBR-DL
+attr datetime 20241130-12:16:57
+attr datetimef 20241130-121657
+attr experiment CBR-DL
+attr inifile omnetpp.ini
+attr iterationvars "$u=0, $numRbs=50, $numUEs=1"
+attr iterationvarsd u=0/numRbs=50/numUEs=1
+attr iterationvarsf u=0,numRbs=50,numUEs=1-
+attr measurement "$u=0, $numRbs=50, $numUEs=1"
+attr network simu5g.simulations.SatCom.networks.MultiSeveralSatelliteSatUE_Standalone
+attr processid 444844
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+itervar numRbs 50
+itervar numUEs 1
+itervar u 0
+config extends MultiCell
+config description "CBR DL traffic from remote server to UEs"
+config *.ue[*].numApps 1
+config *.server.numApps 1
+config *.ue[*].app[*].typename CbrReceiver
+config *.ue[*].app[*].localPort 3000
+config *.server.app[*].typename CbrSender
+config *.server.app[*].PacketSize 100
+config *.server.app[*].sampling_time 0.02s
+config *.server.app[*].destAddress "\"ue[\" + string(ancestorIndex(0)) + \"]\""
+config *.server.app[*].destPort 3000
+config *.server.app[*].localPort 3088+ancestorIndex(0)
+config *.server.app[*].startTime uniform(0s,0.02s)
+config *.server.app[*].finishTime 40s
+config *.ue[*].cellularNic.rrc.debug true
+config *.gnbSat*.cellularNic.rrc.debug true
+config *.ue[*].cellularNic.nrPhy.debug true
+config *.gnbSat*.cellularNic.nrPhy.debug true
+config *.binder.debug true
+config *.configurator.verbose true
+config network simu5g.simulations.SatCom.networks.MultiSeveralSatelliteSatUE_Standalone
+config sim-time-limit 20s
+config description "Base configuration, do not run this config!"
+config **.mobility.constraintAreaMaxX 1100m
+config **.mobility.constraintAreaMaxY 750m
+config **.mobility.constraintAreaMinX 0m
+config **.mobility.constraintAreaMinY 0m
+config **.mobility.constraintAreaMinZ 0m
+config **.mobility.constraintAreaMaxZ 0m
+config **.mobility.initFromDisplayString false
+config *.carrierAggregation.numComponentCarriers 1
+config *.carrierAggregation.componentCarrier[0].numerologyIndex 0
+config *.carrierAggregation.componentCarrier[0].carrierFrequency 2GHz
+config *.carrierAggregation.componentCarrier[0].numBands 50
+config *.gnbSat*.cellularNic.numCarriers 1
+config *.gnbSat*.cellularNic.channelModel[0].componentCarrierIndex 0
+config *.ue[*].cellularNic.numCarriers 1
+config *.gnbSat1.mobility.initialX 20m
+config *.gnbSat1.mobility.initialY 350m
+config *.gnbSat1.mobility.typename LinearMobility
+config *.gnbSat1.mobility.initialX 50m
+config *.gnbSat1.mobility.initialY 550m
+config *.gnbSat1.mobility.speed 15mps
+config *.gnbSat1.mobility.initialMovementHeading 0deg
+config *.gnbSat2.mobility.initialX 500m
+config *.gnbSat2.mobility.initialY 350m
+config *.gnbSat2.mobility.typename LinearMobility
+config *.gnbSat2.mobility.initialX 50m
+config *.gnbSat2.mobility.initialY 550m
+config *.gnbSat2.mobility.speed 15mps
+config *.gnbSat2.mobility.initialMovementHeading 0deg
+config *.gnbSat3.mobility.initialX 350m
+config *.gnbSat3.mobility.initialY 110m
+config *.gnbSat3.mobility.typename LinearMobility
+config *.gnbSat3.mobility.initialX 50m
+config *.gnbSat3.mobility.initialY 550m
+config *.gnbSat3.mobility.speed 15mps
+config *.gnbSat3.mobility.initialMovementHeading 90deg
+config *.gnbSat*.numX2Apps 2
+config *.gnbSat*.x2App[*].server.localPort "5000 + ancestorIndex(1)"
+config *.gnbSat1.x2App[0].client.connectAddress "\"gnbSat2%x2ppp0\""
+config *.gnbSat1.x2App[1].client.connectAddress "\"gnbSat3%x2ppp0\""
+config *.gnbSat2.x2App[0].client.connectAddress "\"gnbSat1%x2ppp0\""
+config *.gnbSat2.x2App[1].client.connectAddress "\"gnbSat3%x2ppp0\""
+config *.gnbSat3.x2App[0].client.connectAddress "\"gnbSat1%x2ppp0\""
+config *.gnbSat3.x2App[1].client.connectAddress "\"gnbSat2%x2ppp0\""
+config *.numUe 1
+config *.ue[*].macCellId 0
+config *.ue[*].masterId 0
+config *.ue[*].nrMacCellId 1
+config *.ue[*].nrMasterId 2
+config **.dynamicCellAssociation false
+config **.enableHandover true
+config *.ue[0].mobility.initialX 450m
+config *.ue[0].mobility.initialY 350m
+config image-path ../../../images
+config output-scalar-file-append false
+config **.routingRecorder.enabled false
+config output-scalar-file "results/CBR-DL/$u=0, $numRbs=50, $numUEs=1-0.sca"
+config output-vector-file "results/CBR-DL/$u=0, $numRbs=50, $numUEs=1-0.vec"
+config seed-set 0
+config **.sctp.**.scalar-recording false
+config **.sctp.**.vector-recording false
+config **.vector-recording true
+config **.sctp.nagleEnabled false
+config **.sctp.enableHeartbeats false
+config **.downlink_interference true
+config **.uplink_interference true
+config **.ueTxPower 1dBm
+config **.eNodeBTxPower 2dBm
+config **.targetBler 0.01
+config **.blerShift 5
+config **.fbPeriod 40
+config *.configurator.config "xmldoc(\"./demo.xml\")"
+
+vector 0 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 1 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 2 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 3 MultiSeveralSatelliteSatUE_Standalone.server.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 4 MultiSeveralSatelliteSatUE_Standalone.server.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 5 MultiSeveralSatelliteSatUE_Standalone.server.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 6 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 7 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 8 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 9 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 10 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 11 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 12 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 13 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 14 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 15 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 16 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 17 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 18 MultiSeveralSatelliteSatUE_Standalone.upf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 19 MultiSeveralSatelliteSatUE_Standalone.upf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 20 MultiSeveralSatelliteSatUE_Standalone.upf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 21 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 22 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 23 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 24 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 25 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 26 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 27 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 28 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 29 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 30 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[3].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 31 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[3].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 32 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[3].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 33 MultiSeveralSatelliteSatUE_Standalone.iUpf.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 34 MultiSeveralSatelliteSatUE_Standalone.iUpf.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 35 MultiSeveralSatelliteSatUE_Standalone.iUpf.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 36 MultiSeveralSatelliteSatUE_Standalone.iUpf.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 37 MultiSeveralSatelliteSatUE_Standalone.iUpf.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 38 MultiSeveralSatelliteSatUE_Standalone.iUpf.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 39 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 40 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 41 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 42 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 43 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 44 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 45 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 46 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 47 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 48 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 49 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 50 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 51 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 52 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 53 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 54 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 55 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 56 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 57 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 58 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 59 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 60 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 61 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 62 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 63 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 64 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 65 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 66 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 67 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 68 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 69 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 70 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 71 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 72 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 73 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 74 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 75 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 76 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 77 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 78 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppMEHostIf.queue queueLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + count(packetPushStarted) - count(packetPulled) - count(packetRemoved) - count(packetDropped)))"
+attr title "queue length"
+attr unit pk
+vector 79 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppMEHostIf.queue queueBitLength:vector ETV
+attr autoWarmupFilter false
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source "warmup(atomic(constant0(packetPushEnded) + sum(packetLength(packetPushStarted)) - sum(packetLength(packetPulled)) - sum(packetLength(packetRemoved)) - sum(packetLength(packetDropped))))"
+attr title "queue bit length"
+attr unit b
+vector 80 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppMEHostIf.ppp transmissionState:vector ETV
+attr interpolationmode sample-hold
+attr recordingmode vector
+attr source transmissionStateChanged
+attr title "tx state"
+vector 81 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 82 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 83 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 84 MultiSeveralSatelliteSatUE_Standalone.ue[0].udp passedUpPk:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetSentToUpper
+attr title "packets passed up, count"
+vector 85 MultiSeveralSatelliteSatUE_Standalone.ue[0].udp droppedPkWrongPort:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsNoPortFound(packetDropped)
+attr title "packets dropped (wrong port), count"
+vector 86 MultiSeveralSatelliteSatUE_Standalone.ue[0].udp droppedPkBadChecksum:vector(count) ETV
+attr interpolationmode none
+attr recordingmode vector(count)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packets dropped (checksum error), count"
+vector 87 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.phy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving cell for the UE"
+attr unit ""
+vector 88 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrPhy servingCell:vector ETV
+attr recordingmode vector
+attr source servingCell
+attr title "ID of the serving cell for the UE"
+attr unit ""
+vector 89 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 90 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 91 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 92 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 93 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 94 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 95 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 96 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 97 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 98 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 99 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 100 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 101 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 102 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 103 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 104 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 105 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 106 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 107 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 108 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 109 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 110 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 111 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 112 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 113 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 114 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 115 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 116 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 117 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 118 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 119 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 120 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 121 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 122 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 123 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.cellularNic.mac avgServedBlocksUl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksUl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 124 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.cellularNic.mac avgServedBlocksDl:vector ETV
+attr recordingmode vector
+attr source avgServedBlocksDl
+attr title "Average number of allocated Resource Blocks in the Dl"
+attr unit blocks
+vector 125 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrChannelModel[0] measuredSinrUl:vector ETV
+attr recordingmode vector
+attr source measuredSinrUl
+attr title "SINR measured at feedback computation, UL"
+attr unit dB
+vector 126 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrChannelModel[0] measuredSinrDl:vector ETV
+attr recordingmode vector
+attr source measuredSinrDl
+attr title "SINR measured at feedback computation, DL"
+attr unit dB
+vector 127 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 128 MultiSeveralSatelliteSatUE_Standalone.server.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 129 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 130 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 131 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 132 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 133 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 134 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 135 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 136 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 137 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 138 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 139 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 140 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 141 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 142 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 143 MultiSeveralSatelliteSatUE_Standalone.upf.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 144 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 145 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 146 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 147 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 148 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 149 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 150 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 151 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 152 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 153 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 154 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 155 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 156 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 157 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 158 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 159 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.pdcpRrc receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 160 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.pdcpRrc sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 161 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.rlc.um receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 162 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 163 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac sentPacketToUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToUpperLayer
+vector 164 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.rlc.um sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 165 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.cellularNic.mac sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 166 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 167 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 168 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrPhy averageCqiDl:vector ETV
+attr recordingmode vector
+attr source averageCqiDl
+attr title "Average Cqi reported in DL"
+attr unit cqi
+vector 169 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrChannelModel[0] rcvdSinrDl:vector ETV
+attr recordingmode vector
+attr source rcvdSinrDl
+attr title "SINR measured at packet reception, DL"
+attr unit dB
+vector 170 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 171 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 172 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 173 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 174 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 175 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 176 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac macDelayDl:vector ETV
+attr recordingmode vector
+attr source macDelayDl
+attr title "Delay at the MAC layer UL"
+attr unit s
+vector 177 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac sentPacketToUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToUpperLayer
+vector 178 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 179 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcPduThroughputDl:vector ETV
+attr recordingmode vector
+attr source rlcPduThroughputDl
+attr title "Throughput at the rlc layer DL"
+attr unit Bps
+vector 180 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcPduDelayDl:vector ETV
+attr recordingmode vector
+attr source rlcPduDelayDl
+attr title "Delay at the rlc layer UL"
+attr unit s
+vector 181 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcThroughputDl:vector ETV
+attr recordingmode vector
+attr source rlcThroughputDl
+attr title "Throughput at the rlc layer DL"
+attr unit Bps
+vector 182 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcPacketLossDl:vector ETV
+attr recordingmode vector
+attr source rlcPacketLossDl
+attr title "rlc Packet Loss"
+attr unit ""
+vector 183 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcPacketLossTotal:vector ETV
+attr recordingmode vector
+attr source rlcPacketLossTotal
+attr title "rlc Packet Loss"
+attr unit ""
+vector 184 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcDelayDl:vector ETV
+attr recordingmode vector
+attr source rlcDelayDl
+attr title "Delay at the rlc layer DL"
+attr unit s
+vector 185 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um sentPacketToUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToUpperLayer
+vector 186 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrRlc.um rlcPduPacketLossDl:vector ETV
+attr recordingmode vector
+attr source rlcPduPacketLossDl
+attr title "rlc Packet Loss"
+attr unit ""
+vector 187 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.pdcpRrc receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 188 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.pdcpRrc sentPacketToUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToUpperLayer
+vector 189 MultiSeveralSatelliteSatUE_Standalone.ue[0].udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 190 MultiSeveralSatelliteSatUE_Standalone.ue[0].app[0] cbrReceivedBytes:vector ETV
+attr recordingmode vector
+attr source cbrReceivedBytesSignal
+attr title "Bytes received at the application level"
+attr unit Bps
+vector 191 MultiSeveralSatelliteSatUE_Standalone.ue[0].app[0] cbrFrameDelay:vector ETV
+attr recordingmode vector
+attr source cbrFrameDelaySignal
+attr title "Cbr Frame Delay"
+attr unit s
+vector 192 MultiSeveralSatelliteSatUE_Standalone.ue[0].app[0] cbrRcvdPkt:vector ETV
+attr recordingmode vector
+attr source cbrRcvdPkt
+attr title "Received packet ID"
+attr unit ""
+vector 193 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 194 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 195 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac harqErrorRate_1st_Dl:vector ETV
+attr recordingmode vector
+attr source harqErrorRate_1st_Dl
+attr title "Harq Error Rate Dl (1st tx)"
+attr unit ""
+vector 196 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac harqErrorRateDl:vector ETV
+attr recordingmode vector
+attr source harqErrorRateDl
+attr title "Harq Error Rate Dl"
+attr unit ""
+vector 197 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac harqTxAttemptsDl:vector ETV
+attr recordingmode vector
+attr source harqTxAttemptsDl
+attr title "Harq Tx Attempts Dl"
+attr unit ""
+vector 198 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 199 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 200 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 201 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 202 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 203 MultiSeveralSatelliteSatUE_Standalone.server.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 204 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 205 MultiSeveralSatelliteSatUE_Standalone.router.ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 206 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 207 MultiSeveralSatelliteSatUE_Standalone.upf.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 208 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 209 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[2].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 210 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.ppp packetDropIncorrectlyReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetDropReasonIsIncorrectlyReceived(packetDropped)
+attr title "packet drop: incorrectly received, packetBytes"
+vector 211 MultiSeveralSatelliteSatUE_Standalone.ue[0].cellularNic.nrMac harqErrorRate_2nd_Dl:vector ETV
+attr recordingmode vector
+attr source harqErrorRate_2nd_Dl
+attr title "Harq Error Rate Dl (2nd tx)"
+attr unit ""
+vector 212 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 213 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 214 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.udp packetSent:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSent
+attr title "packets sent, packetBytes"
+vector 215 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 216 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 217 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2App[0].client packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 218 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.udp packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 219 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.pdcpRrc receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 220 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.pdcpRrc sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 221 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.rlc.um receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 222 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac receivedPacketFromUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromUpperLayer
+vector 223 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue incomingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPushStarted)
+attr title "incoming packet lengths"
+attr unit b
+vector 224 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 225 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue queueingTime:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source queueingTime(packetPulled)
+attr title "queueing times"
+attr unit s
+vector 226 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue outgoingPacketLengths:vector ETV
+attr interpolationmode none
+attr recordingmode vector
+attr source packetLength(packetPulled)
+attr title "outgoing packet lengths"
+attr unit b
+vector 227 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 228 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].ppp rcvdPkFromHl:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceivedFromUpper
+attr title "packets received from higher layer, packetBytes"
+vector 229 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[1].ppp txPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToLower
+attr title "packets transmitted, packetBytes"
+vector 230 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2App[0].client packetReceived:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetReceived
+attr title "packets received, packetBytes"
+vector 231 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.ppp rxPkOk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source rxPkOk
+attr title "packets received OK, packetBytes"
+vector 232 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.ppp passedUpPk:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source packetSentToUpper
+attr title "packets passed to higher layer, packetBytes"
+vector 233 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac receivedPacketFromLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source receivedPacketFromLowerLayer
+vector 234 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac sentPacketToUpperLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToUpperLayer
+vector 235 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.rlc.um sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 236 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.cellularNic.mac sentPacketToLowerLayer:vector(packetBytes) ETV
+attr interpolationmode none
+attr recordingmode vector(packetBytes)
+attr source sentPacketToLowerLayer
+vector 237 MultiSeveralSatelliteSatUE_Standalone.server.app[0] cbrGeneratedThroughtput:vector ETV
+attr recordingmode vector
+attr source cbrGeneratedThroughtputSignal
+attr title "Throughput generated by the application"
+attr unit Bps
+vector 238 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 239 MultiSeveralSatelliteSatUE_Standalone.router.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 240 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 241 MultiSeveralSatelliteSatUE_Standalone.upf.pppIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 242 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 243 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 244 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[3].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 245 MultiSeveralSatelliteSatUE_Standalone.iUpf.ppp[3].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 246 MultiSeveralSatelliteSatUE_Standalone.iUpf.pppIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 247 MultiSeveralSatelliteSatUE_Standalone.iUpf.pppIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 248 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 249 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 250 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 251 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.x2ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 252 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppMEHostIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 253 MultiSeveralSatelliteSatUE_Standalone.gnbSat1.pppMEHostIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 254 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 255 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 256 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 257 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.x2ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 258 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppMEHostIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 259 MultiSeveralSatelliteSatUE_Standalone.gnbSat2.pppMEHostIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 260 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 261 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 262 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 263 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[0].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 264 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 265 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.x2ppp[1].queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+vector 266 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppMEHostIf.queue outgoingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPulled)
+attr title "outgoing datarate"
+attr unit bps
+vector 267 MultiSeveralSatelliteSatUE_Standalone.gnbSat3.pppMEHostIf.queue incomingDataRate:vector ETV
+attr interpolationmode linear
+attr recordingmode vector
+attr source throughput(packetPushStarted)
+attr title "incoming datarate"
+attr unit bps
+0	75207 26011 0 209065 0 19.982631937009 1005 0 0 0 0
+1	101218 26011 0 209065 0 19.982631937009 1005 0 0 0 0
+2	127229 51950 0 209066 0 19.982632045009 2001 0 1 1000 1000
+3	179179 8 0 0 0 0 1 0 0 0 0
+4	179187 8 0 0 0 0 1 0 0 0 0
+5	179195 8 0 0 0 0 1 0 0 0 0
+6	179203 40 0 0 0 0 5 0 0 0 0
+7	179243 40 0 0 0 0 5 0 0 0 0
+8	179283 8 0 0 0 0 1 0 0 0 0
+9	179291 26011 0 209069 0 19.982632095009 1005 0 0 0 0
+10	205302 27016 0 209069 0 19.982632095009 1005 0 0 0 0
+11	232318 53951 0 209070 0 19.982632203009 2001 0 1 1000 1000
+12	286269 27016 0 209076 0 19.982632253009 1005 0 0 0 0
+13	313285 27016 0 209076 0 19.982632253009 1005 0 0 0 0
+14	340301 53951 0 209077 0 19.982632389809 2001 0 1 1000 1000
+15	394252 45 0 0 0 0 5 0 0 0 0
+16	394297 45 0 0 0 0 5 0 0 0 0
+17	394342 9 0 0 0 0 1 0 0 0 0
+18	394351 9 0 0 0 0 1 0 0 0 0
+19	394360 9 0 0 0 0 1 0 0 0 0
+20	394369 9 0 0 0 0 1 0 0 0 0
+21	394378 45 0 0 0 0 5 0 0 0 0
+22	394423 45 0 0 0 0 5 0 0 0 0
+23	394468 9 0 0 0 0 1 0 0 0 0
+24	394477 13961 0 209080 0 19.982632439809 502 0 0 0 0
+25	408438 13961 0 209080 0 19.982632439809 502 0 0 0 0
+26	422399 27841 0 209081 0 19.982632508209 995 0 1 497 497
+27	450240 13100 0 105169 0 10.042632439809 508 0 0 0 0
+28	463340 13100 0 105169 0 10.042632439809 508 0 0 0 0
+29	476440 26119 0 105170 0 10.042632508209 1007 0 1 503 503
+30	502559 45 0 0 0 0 5 0 0 0 0
+31	502604 45 0 0 0 0 5 0 0 0 0
+32	502649 9 0 0 0 0 1 0 0 0 0
+33	502658 45 0 0 0 0 5 0 0 0 0
+34	502703 45 0 0 0 0 5 0 0 0 0
+35	502748 9 0 0 0 0 1 0 0 0 0
+36	502757 9 0 0 0 0 1 0 0 0 0
+37	502766 9 0 0 0 0 1 0 0 0 0
+38	502775 9 0 0 0 0 1 0 0 0 0
+39	502784 45 0 0 0 0 5 0 0 0 0
+40	502829 45 0 0 0 0 5 0 0 0 0
+41	502874 9 0 0 0 0 1 0 0 0 0
+42	502883 176 0 105262 0 10.05001 11 0 0 0 0
+43	503059 176 0 105262 0 10.05001 11 0 0 0 0
+44	503235 287 0 105264 0 10.0500100568 13 0 1 6 6
+45	503522 126 0 419 0 0.02264137868 9 0 0 0 0
+46	503648 126 0 419 0 0.02264137868 9 0 0 0 0
+47	503774 182 0 421 0 0.02264141308 9 0 1 4 4
+48	503956 45 0 0 0 0 5 0 0 0 0
+49	504001 45 0 0 0 0 5 0 0 0 0
+50	504046 9 0 0 0 0 1 0 0 0 0
+51	504055 14404 0 209100 0 19.98406405877 501 0 500 125250 41791750
+52	518459 9 0 0 0 0 1 0 0 0 0
+53	518468 9 0 0 0 0 1 0 0 0 0
+54	518477 45 0 0 0 0 5 0 0 0 0
+55	518522 45 0 0 0 0 5 0 0 0 0
+56	518567 9 0 0 0 0 1 0 0 0 0
+57	518576 260 0 105401 0 10.063618578953 14 0 0 0 0
+58	518836 260 0 105401 0 10.063618578953 14 0 0 0 0
+59	519096 455 0 105405 0 10.063618622953 19 0 1 9 9
+60	519551 127 0 366 0 0.019286017263 9 0 0 0 0
+61	519678 127 0 366 0 0.019286017263 9 0 0 0 0
+62	519805 184 0 368 0 0.019286051663 9 0 1 4 4
+63	519989 45 0 0 0 0 5 0 0 0 0
+64	520034 45 0 0 0 0 5 0 0 0 0
+65	520079 9 0 0 0 0 1 0 0 0 0
+66	520088 13934 0 105189 0 10.044226301933 503 0 502 126253 42294755
+67	534022 9 0 0 0 0 1 0 0 0 0
+68	534031 9 0 0 0 0 1 0 0 0 0
+69	534040 45 0 0 0 0 5 0 0 0 0
+70	534085 45 0 0 0 0 5 0 0 0 0
+71	534130 9 0 0 0 0 1 0 0 0 0
+72	534139 127 0 496 0 0.026036269786 9 0 0 0 0
+73	534266 127 0 496 0 0.026036269786 9 0 0 0 0
+74	534393 184 0 498 0 0.026036304186 9 0 1 4 4
+75	534577 127 0 341 0 0.017812097541 9 0 0 0 0
+76	534704 127 0 341 0 0.017812097541 9 0 0 0 0
+77	534831 184 0 343 0 0.017812131941 9 0 1 4 4
+78	535015 45 0 0 0 0 5 0 0 0 0
+79	535060 45 0 0 0 0 5 0 0 0 0
+80	535105 9 0 0 0 0 1 0 0 0 0
+81	535114 9 0 0 0 0 1 0 0 0 0
+82	535123 9 0 0 0 0 1 0 0 0 0
+83	535132 9 0 0 0 0 1 0 0 0 0
+84	535141 19832 0 209157 0 19.989 999 0 998 498501 331835499
+85	554973 9 0 0 0 0 1 0 0 0 0
+86	554982 9 0 0 0 0 1 0 0 0 0
+87	554991 18 0 0 0 0 2 0 0 0 0
+88	555009 39 0 105249 0 10.05001 3 0 2 3 5
+89	555048 144 66 105262 0 10.05001 6 288 1440 4352 4067328
+90	555192 131 66 105262 0 10.05001 6 0 0 0 0
+91	555323 144 66 105262 0 10.05001 6 288 1440 4352 4067328
+92	555467 140 66 105262 0 10.05001 6 36 180 544 63552
+93	555607 140 66 105262 0 10.05001 6 43 187 586 71462
+94	555747 90 67 419 0 0.02264137868 4 288 1440 3456 3657728
+95	555837 81 67 419 0 0.02264137868 4 0 0 0 0
+96	555918 90 67 419 0 0.02264137868 4 288 1440 3456 3657728
+97	556008 88 67 419 0 0.02264137868 4 36 180 432 57152
+98	556096 88 67 419 0 0.02264137868 4 43 187 460 63396
+99	556184 237 68 105401 0 10.063618578953 9 288 1440 8384 9486336
+100	556421 224 68 105401 0 10.063618578953 9 0 0 0 0
+101	556645 246 68 105401 0 10.063618578953 9 288 1440 8384 9486336
+102	556891 239 68 105401 0 10.063618578953 9 36 180 1048 148224
+103	557130 239 68 105401 0 10.063618578953 9 43 187 1111 163337
+104	557369 95 69 366 0 0.019286017263 4 288 1440 3456 3657728
+105	557464 86 69 366 0 0.019286017263 4 0 0 0 0
+106	557550 95 69 366 0 0.019286017263 4 288 1440 3456 3657728
+107	557645 93 69 366 0 0.019286017263 4 36 180 432 57152
+108	557738 93 69 366 0 0.019286017263 4 43 187 460 63396
+109	557831 95 70 496 0 0.026036269786 4 288 1440 3456 3657728
+110	557926 86 70 496 0 0.026036269786 4 0 0 0 0
+111	558012 95 70 496 0 0.026036269786 4 288 1440 3456 3657728
+112	558107 93 70 496 0 0.026036269786 4 36 180 432 57152
+113	558200 93 70 496 0 0.026036269786 4 43 187 460 63396
+114	558293 95 71 341 0 0.017812097541 4 288 1440 3456 3657728
+115	558388 86 71 341 0 0.017812097541 4 0 0 0 0
+116	558474 95 71 341 0 0.017812097541 4 288 1440 3456 3657728
+117	558569 93 71 341 0 0.017812097541 4 36 180 432 57152
+118	558662 93 71 341 0 0.017812097541 4 43 187 460 63396
+119	558755 377204 91 209251 0.001 20 20000 0 0 0 0
+120	935959 377204 91 209251 0.001 20 20000 0 8 1192 2966
+121	1313163 377206 92 209252 0.001 20 20000 0 0 0 0
+122	1690369 377206 92 209252 0.001 20 20000 0 2 844 1528
+123	2067575 377206 93 209253 0.001 20 20000 0 0 0 0
+124	2444781 377206 93 209253 0.001 20 20000 0 0 0 0
+125	2821987 16611 107 208854 0.002 19.962 500 -4.9142043002965 23.967280635727 2611.7018271684 37730.826747011
+126	2838598 16436 107 208854 0.002 19.962 500 5.6902304560373 34.92941855144 8004.0604014987 153030.3191559
+127	2855034 13036 108 105150 0.002 10.042 754 1 1 754 754
+128	2868070 29971 110 209063 0.002631937009 19.982631937009 1000 108 108 108000 11664000
+129	2898041 30971 112 209065 0.002631937009 19.982631937009 1000 1024 1024 1024000 1048576000
+130	2929012 27971 112 209065 0.002631937009 19.982631937009 1000 0 0 0 0
+131	2956983 30971 112 209065 0.002631937009 19.982631937009 1000 1024 1024 1024000 1048576000
+132	2987954 29971 112 209065 0.002631937009 19.982631937009 1000 128 128 128000 16384000
+133	3017925 29971 112 209065 0.002631937009 19.982631937009 1000 135 135 135000 18225000
+134	3047896 29971 114 209067 0.002632095009 19.982632095009 1000 135 135 135000 18225000
+135	3077867 29971 114 209067 0.002632095009 19.982632095009 1000 128 128 128000 16384000
+136	3107838 30971 116 209069 0.002632095009 19.982632095009 1000 1024 1024 1024000 1048576000
+137	3138809 27971 116 209069 0.002632095009 19.982632095009 1000 0 0 0 0
+138	3166780 30971 116 209069 0.002632095009 19.982632095009 1000 1024 1024 1024000 1048576000
+139	3197751 29971 116 209069 0.002632095009 19.982632095009 1000 128 128 128000 16384000
+140	3227722 29971 116 209069 0.002632095009 19.982632095009 1000 135 135 135000 18225000
+141	3257693 29971 118 209071 0.002632253009 19.982632253009 1000 135 135 135000 18225000
+142	3287664 29971 118 209071 0.002632253009 19.982632253009 1000 128 128 128000 16384000
+143	3317635 29971 121 209074 0.002632253009 19.982632253009 1000 144 144 144000 20736000
+144	3347606 30971 123 209076 0.002632253009 19.982632253009 1000 1312 1312 1312000 1721344000
+145	3378577 27971 123 209076 0.002632253009 19.982632253009 1000 0 0 0 0
+146	3406548 30971 123 209076 0.002632253009 19.982632253009 1000 1312 1312 1312000 1721344000
+147	3437519 29971 123 209076 0.002632253009 19.982632253009 1000 164 164 164000 26896000
+148	3467490 29971 123 209076 0.002632253009 19.982632253009 1000 171 171 171000 29241000
+149	3497461 29971 125 209078 0.002632439809 19.982632439809 1000 171 171 171000 29241000
+150	3527432 29971 125 209078 0.002632439809 19.982632439809 1000 164 164 164000 26896000
+151	3557403 15067 127 105169 0.002632439809 10.042632439809 503 1312 1312 659936 865836032
+152	3572470 13558 127 105169 0.002632439809 10.042632439809 503 0 0 0 0
+153	3586028 15067 127 105169 0.002632439809 10.042632439809 503 1312 1312 659936 865836032
+154	3601095 14564 127 105169 0.002632439809 10.042632439809 503 164 164 82492 13528688
+155	3615659 14564 127 105169 0.002632439809 10.042632439809 503 171 171 86013 14708223
+156	3630223 14535 145 105187 0.004226301933 10.044226301933 502 171 171 85842 14678982
+157	3644758 14535 145 105187 0.004226301933 10.044226301933 502 164 164 82328 13501792
+158	3659293 14535 147 105189 0.004226301933 10.044226301933 502 144 144 72288 10409472
+159	3673828 14442 150 104545 0.004226301933 9.984226301933 499 128 128 63872 8175616
+160	3688270 14442 150 104545 0.004226301933 9.984226301933 499 129 129 64371 8303859
+161	3702712 14442 151 104546 0.004226301933 9.984226301933 499 129 129 64371 8303859
+162	3717154 24393 153 104554 0.004226301933 9.985 998 131 131 130738 17126678
+163	3741547 8953 155 104550 0.005 9.985 499 1 1 499 499
+164	3750500 9951 157 104552 0.005 9.985 499 131 131 65369 8563339
+165	3760451 10013 164 104559 0.005 9.985 502 133 133 66766 8879878
+166	3770464 107 167 448 0.005446033673 0.024731999736 4 43 187 460 63396
+167	3770571 107 167 448 0.005446033673 0.024731999736 4 36 180 432 57152
+168	3770678 19815 181 209128 0.006 19.986 1006 7 14 10871 121943
+169	3790493 33092 181 209128 0.006 19.986 1006 8.2284221351015 43.500319091008 20366.362902043 488889.13445262
+170	3823585 21101 182 209129 0.006 19.986 1006 133 391 134056 17930326
+171	3844686 106 183 558 0.006415470258 0.032451688844 4 43 187 460 63396
+172	3844792 106 183 558 0.006415470258 0.032451688844 4 36 180 432 57152
+173	3844898 107 189 447 0.006919953395 0.024731999736 4 43 187 460 63396
+174	3845005 107 189 447 0.006919953395 0.024731999736 4 36 180 432 57152
+175	3845112 19089 215 209150 0.009 19.989 1006 1 1 1006 1006
+176	3864201 22867 215 209150 0.009 19.989 996 0.004 0.01 4.044 0.016776
+177	3887068 20885 215 209150 0.009 19.989 996 131 389 130734 17226516
+178	3907953 20885 218 209153 0.009 19.989 996 131 389 130734 17226516
+179	3928838 18893 218 209153 0.009 19.989 996 0 0 0 0
+180	3947731 22867 218 209153 0.009 19.989 996 0.004 0.01 4.044 0.016776
+181	3970598 32789 218 209153 0.009 19.989 998 12.788737979578 14333.333333333 4231068.8791082 23515274155.664
+182	4003387 18933 218 209153 0.009 19.989 998 0 0 0 0
+183	4022320 18933 218 209153 0.009 19.989 998 0 0 0 0
+184	4041253 31410 218 209153 0.009 19.989 998 0.004773698067 0.082773698067 5.058785522877 0.035720164128439
+185	4072663 20929 218 209153 0.009 19.989 998 129 129 128742 16607718
+186	4093592 18893 218 209153 0.009 19.989 996 0 0 0 0
+187	4112485 20929 219 209154 0.009 19.989 998 129 129 128742 16607718
+188	4133414 20929 219 209154 0.009 19.989 998 128 128 127744 16351232
+189	4154343 20929 222 209157 0.009 19.989 998 108 108 107784 11640672
+190	4175272 20930 223 209158 0.009 19.989 998 100 100 99800 9980000
+191	4196202 31908 223 209158 0.009 19.989 998 0.006368062991 0.084368062991 6.5693268650181 0.053328652764978
+192	4228110 20820 223 209158 0.009 19.989 998 0 999 498763 332526271
+193	4248930 107 227 557 0.009810361364 0.032451688844 4 43 187 460 63396
+194	4249037 107 227 557 0.009810361364 0.032451688844 4 36 180 432 57152
+195	4249144 17899 242 209171 0.01 19.99 996 0 1 10 10
+196	4267043 18095 242 209171 0.01 19.99 1006 0 1 10 10
+197	4285138 17909 242 209171 0.01 19.99 996 1 2 1006 1026
+198	4303047 260 251 105511 0.011574037589 10.075192574942 9 43 187 1111 163337
+199	4303307 260 251 105511 0.011574037589 10.075192574942 9 36 180 1048 148224
+200	4303567 167 285 105395 0.013608607753 10.063618578953 6 43 187 586 71462
+201	4303734 167 285 105395 0.013608607753 10.063618578953 6 36 180 544 63552
+202	4303901 4157 1306 209271 0.1 20 200 51200 51200 10240000 524288000000
+203	4308058 4157 1306 209271 0.1 20 200 51200 51200 10240000 524288000000
+204	4312215 4157 1310 209271 0.1 20 200 51200 51200 10240000 524288000000
+205	4316372 4157 1310 209271 0.1 20 200 51200 51200 10240000 524288000000
+206	4320529 4157 1317 209271 0.1 20 200 65600 65600 13120000 860672000000
+207	4324686 4157 1317 209271 0.1 20 200 65600 65600 13120000 860672000000
+208	4328843 3761 1321 209271 0.1 20 200 0 65600 6599360 431885209600
+209	4332604 3761 1321 209271 0.1 20 200 0 65600 6599360 431885209600
+210	4336365 29 49389 49389 4.704226301933 4.704226301933 1 171 171 171 29241
+211	4336394 196 68092 198999 6.496 19.016 10 0 0 0 0
+212	4336590 3469 104718 209271 0.1 20 200 0 49280 83840 3622912000
+213	4340059 3469 104718 209271 0.1 20 200 0 49280 83840 3622912000
+214	4343528 93 104782 105194 10.004226301933 10.044226301933 3 148 148 444 65712
+215	4343621 3468 104848 209271 0.1 20 200 0 34560 43520 1274675200
+216	4347089 3468 104848 209271 0.1 20 200 0 34560 43520 1274675200
+217	4350557 30 104849 104849 10.011584008789 10.011584008789 1 15 15 15 225
+218	4350587 15003 104887 209100 10.015800393922 19.98406405877 500 144 148 72012 10371504
+219	4365590 14958 105251 209103 10.05001 19.98406405877 499 128 128 63872 8175616
+220	4380548 14958 105251 209103 10.05001 19.98406405877 499 129 129 64371 8303859
+221	4395506 14958 105254 209104 10.05001 19.98406405877 499 129 129 64371 8303859
+222	4410464 25892 105260 209111 10.05001 19.985 996 131 389 130734 17226516
+223	4436356 15904 105385 209080 10.062632439809 19.982632439809 497 1312 1312 652064 855507968
+224	4452260 3861 105385 209271 0.1 20 200 0 65600 6520640 426721177600
+225	4456121 14413 105385 209080 10.062632439809 19.982632439809 497 0 0 0 0
+226	4470534 15904 105385 209080 10.062632439809 19.982632439809 497 1312 1312 652064 855507968
+227	4486438 3861 105385 209271 0.1 20 200 0 65600 6520640 426721177600
+228	4490299 15407 105385 209080 10.062632439809 19.982632439809 497 164 164 81508 13367312
+229	4505706 15407 105385 209080 10.062632439809 19.982632439809 497 171 171 84987 14532777
+230	4521113 30 105402 105402 10.063618578953 10.063618578953 1 15 15 15 225
+231	4521143 14910 105414 209098 10.06406405877 19.98406405877 497 171 171 84987 14532777
+232	4536053 14910 105414 209098 10.06406405877 19.98406405877 497 164 164 81508 13367312
+233	4550963 14544 105573 209171 10.082 19.99 752 1 1 752 752
+234	4565507 9940 105594 209107 10.083 19.985 497 1 1 497 497
+235	4575447 10934 105596 209109 10.083 19.985 497 131 389 65365 8663177
+236	4586381 11088 105603 209116 10.083 19.985 504 133 391 67290 9050448
+237	4597469 19 209271 209271 20 20 1 5000 5000 5000 25000000
+238	4597488 3461 209271 209271 0.1 20 200 0 0 0 0
+239	4600949 3461 209271 209271 0.1 20 200 0 0 0 0
+240	4604410 3461 209271 209271 0.1 20 200 0 0 0 0
+241	4607871 3461 209271 209271 0.1 20 200 0 0 0 0
+242	4611332 3461 209271 209271 0.1 20 200 0 0 0 0
+243	4614793 3461 209271 209271 0.1 20 200 0 0 0 0
+244	4618254 3461 209271 209271 0.1 20 200 0 0 0 0
+245	4621715 3461 209271 209271 0.1 20 200 0 0 0 0
+246	4625176 3461 209271 209271 0.1 20 200 0 0 0 0
+247	4628637 3461 209271 209271 0.1 20 200 0 0 0 0
+248	4632098 3461 209271 209271 0.1 20 200 0 0 0 0
+249	4635559 3461 209271 209271 0.1 20 200 0 0 0 0
+250	4639020 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+251	4642485 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+252	4645950 3461 209271 209271 0.1 20 200 0 0 0 0
+253	4649411 3461 209271 209271 0.1 20 200 0 0 0 0
+254	4652872 3461 209271 209271 0.1 20 200 0 0 0 0
+255	4656333 3461 209271 209271 0.1 20 200 0 0 0 0
+256	4659794 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+257	4663259 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+258	4666724 3461 209271 209271 0.1 20 200 0 0 0 0
+259	4670185 3461 209271 209271 0.1 20 200 0 0 0 0
+260	4673646 3461 209271 209271 0.1 20 200 0 0 0 0
+261	4677107 3461 209271 209271 0.1 20 200 0 0 0 0
+262	4680568 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+263	4684033 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+264	4687498 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+265	4690963 3465 209271 209271 0.1 20 200 0 34560 34560 1194393600
+266	4694428 3461 209271 209271 0.1 20 200 0 0 0 0
+267	4697889 3461 209271 209271 0.1 20 200 0 0 0 0
+
